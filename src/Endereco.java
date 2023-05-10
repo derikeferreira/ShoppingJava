@@ -9,15 +9,15 @@ public class Endereco {
     private String complemento;
 
 
-    public Endereco(String nomeDaRua, String cidade, String estado, String pais, String cep, String numero, String complemento ){
+    public Endereco(String municipioLoja, String ruaLoja, String estadoLoja, String paisLoja, String cepLoja, String numeroLoja, String complementoLoja){
 
-        this.nomeDaRua = nomeDaRua;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.pais = pais;
-        this.cep = cep;
-        this.numero = numero;
-        this.complemento = complemento;
+        this.nomeDaRua = ruaLoja;
+        this.cidade = municipioLoja;
+        this.estado = estadoLoja;
+        this.pais = paisLoja;
+        this.cep = cepLoja;
+        this.numero = numeroLoja;
+        this.complemento = complementoLoja;
 
     }
 
@@ -78,6 +78,7 @@ public class Endereco {
     }
 
 
+    @Override
     public String toString() {
         return "Endereco{" +
                 "nomeDaRua='" + nomeDaRua + '\'' +

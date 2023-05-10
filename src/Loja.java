@@ -1,18 +1,19 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Loja {
 
-    private String Nome;
-    private int QuantidadeFuncionarios;
-    private double SalarioBaseFuncionario;
-    private Date date;
+    private String nome;
+    private int quantidadeFuncionarios;
+    private double salarioBaseFuncionario;
+    private Data date;
     private Endereco endereco;
 
-    public Loja(String nome, int QuantidadeFuncionarios, double SalarioBaseFuncionario, Date date, Endereco endereco){
+    public Loja(String nome, int QuantidadeFuncionarios, double SalarioBaseFuncionario, Data date, Endereco endereco){
 
-        this.Nome = nome;
-        this.QuantidadeFuncionarios = QuantidadeFuncionarios;
-        this.SalarioBaseFuncionario = SalarioBaseFuncionario;
+        this.nome = nome;
+        this.quantidadeFuncionarios = QuantidadeFuncionarios;
+        this.salarioBaseFuncionario = SalarioBaseFuncionario;
         this.date = date;
         this.endereco = endereco;
 
@@ -20,37 +21,37 @@ public class Loja {
 
     public Loja(String nome, int QuantidadeFuncionarios){
 
-        this.Nome = nome;
-        this.QuantidadeFuncionarios = QuantidadeFuncionarios;
+        this.nome = nome;
+        this.quantidadeFuncionarios = QuantidadeFuncionarios;
 
     }
 
     public String getNome(){
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome){
 
-        this.Nome = nome;
+        this.nome = nome;
     }
 
     public int getQuantidadeFuncionarios(){
-        return QuantidadeFuncionarios;
+        return quantidadeFuncionarios;
     }
 
     public void setQuantidadeFuncionarios(int QuantidadeFuncionarios){
-        this.QuantidadeFuncionarios = QuantidadeFuncionarios;
+        this.quantidadeFuncionarios = QuantidadeFuncionarios;
     }
 
     public double getSalarioBaseFuncionario() {
-        return SalarioBaseFuncionario;
+        return salarioBaseFuncionario;
     }
 
     public void setSalarioBaseFuncionario(double salarioBaseFuncionario) {
-        SalarioBaseFuncionario = salarioBaseFuncionario;
+        salarioBaseFuncionario = salarioBaseFuncionario;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Data date) {
         this.date = date;
     }
 
@@ -58,7 +59,7 @@ public class Loja {
         this.endereco = endereco;
     }
 
-    public Date getDate() {
+    public Data getDate() {
         return date;
     }
 
@@ -66,9 +67,18 @@ public class Loja {
         return endereco;
     }
 
+
     public String toString() {
-        return "Nome da loja: " + this.Nome + ", Quantidade de funcionarios: " + this.QuantidadeFuncionarios +
-                ", Salario base: ";  // + this.(salarioBaseFuncionario + " ") ;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        return "Loja{" +
+                "nome='" + nome +
+                ", quantidadeFuncionarios=" + quantidadeFuncionarios +
+                ", salarioBaseFuncionario=" + salarioBaseFuncionario +
+                ", date=" + sdf.format(date) +
+                ", endereco=" + endereco +
+                '}';
     }
 
     public double gastosComSalario() {

@@ -1,10 +1,12 @@
+import java.text.SimpleDateFormat;
+
 public class Data {
 
     private int dia;
     private int mes;
     private int ano;
 
-    public String Data(int dia, int mes, int ano){
+    public Data(int dia, int mes, int ano){
 
 
         boolean validarData = true;
@@ -13,9 +15,11 @@ public class Data {
 
             if (mes == 2 && dia > 28 && (ano%4) != 0){
 
+
                 validarData = false;
 
             } else if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30 ) {
+
 
                 validarData = false;
 
@@ -29,24 +33,23 @@ public class Data {
         }
 
 
-        if(validarData = false){
-
-            this.dia = 1;
-            this.mes = 1;
-            this.ano = 2000;
-
-            String CaracterTamanho = "Erro";
-            return CaracterTamanho;
-        }else {
+        if(validarData){
 
             this.dia = dia;
             this.mes = mes;
             this.ano = ano;
 
+
+        }else {
+
+            this.dia = 1;
+            this.mes = 1;
+            this.ano = 2000;
+
+            System.out.println("Erro, data inválida");
+
         }
 
-
-        return null;
     }
 
     public int getDia() {
@@ -74,12 +77,14 @@ public class Data {
     }
 
 
+    @Override
     public String toString() {
+
+
         return "Data{" +
-                "dia=" + dia +
-                ", mes=" + mes +
-                ", ano=" + ano +
+                dia + "/" + mes + "/" + ano +
                 '}';
+
     }
 
     public boolean verificaAnoBissexto(){
