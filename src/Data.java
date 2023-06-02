@@ -8,47 +8,37 @@ public class Data {
 
     public Data(int dia, int mes, int ano){
 
+       //else if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30 ) { nao pode passar de 30 dias
 
         boolean validarData = true;
 
-        if(mes > 0 && ano > 0 && dia >0 && mes <= 12 && dia <= 31 ){
+        this.dia = dia;
+        this.mes = mes;
+        this.ano = ano;
 
-            if (mes == 2 && dia > 28 && (ano%4) != 0){
-
-
-                validarData = false;
-
-            } else if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30 ) {
-
-
-                validarData = false;
-
-            }
-
-
-        }else {
-
+        if (ano<1){
             validarData = false;
-
+        } else if (dia > 31 || dia < 1) {
+            validarData = false;
+        } else if (mes == 2 && dia > 28) {
+            if (dia == 29 && verificaAnoBissexto()){
+                //faz nada
+            } else {
+                validarData = false;
+            }
+        } else if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) {
+            validarData = false;
         }
 
-
-        if(validarData){
-
-            this.dia = dia;
-            this.mes = mes;
-            this.ano = ano;
-
-
-        }else {
-
+        if (validarData){
+            //faz nada
+        } else {
+            System.out.println("ERRO, data alterada para 1/1/2000!");
             this.dia = 1;
             this.mes = 1;
-            this.ano = 2000;
-
-            System.out.println("Erro, data inválida");
-
+            this.ano = 2020;
         }
+
 
     }
 
@@ -88,12 +78,15 @@ public class Data {
     }
 
     public boolean verificaAnoBissexto(){
-        if((ano%4) == 0){
-            return true;
-        } else{
-            return false;
+        boolean verificaAno = true;
+
+        if((ano % 4) != 0){
+
+            verificaAno = false;
+
         }
 
+        return verificaAno;
     }
 }
 

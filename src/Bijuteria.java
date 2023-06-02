@@ -1,9 +1,14 @@
-public class Bijuteria {
+public class Bijuteria extends Loja{
 
     private double metaVendas;
+    private String tipoLoja;
 
-    public Bijuteria(double metaVendas) {
+
+    public Bijuteria(String nome, int QuantidadeFuncionarios, double SalarioBaseFuncionario, Endereco endereco, Data dateFundacao, int tamanhoEstoque , double metaVendas) {
+
+        super( nome,  QuantidadeFuncionarios, SalarioBaseFuncionario,  endereco,  dateFundacao, tamanhoEstoque);
         this.metaVendas = metaVendas;
+        this.tipoLoja = "Cosmetico";
     }
 
 

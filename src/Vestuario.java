@@ -1,7 +1,10 @@
-public class Vestuario {
+public class Vestuario extends Loja {
 
     private boolean produtosImportados;
-    public Vestuario(boolean produtosImportados){
+
+    public Vestuario(String nome, int QuantidadeFuncionarios, double SalarioBaseFuncionario, Endereco endereco, Data dateFundacao,boolean produtosImportados, int tamanhoEstoque ){
+
+        super( nome,  QuantidadeFuncionarios, SalarioBaseFuncionario,  endereco,  dateFundacao, tamanhoEstoque);
         this.produtosImportados = produtosImportados;
     }
 
@@ -15,8 +18,11 @@ public class Vestuario {
 
     @Override
     public String toString() {
-        return "Vestuario{" +
-                "produtosImportados=" + produtosImportados +
-                '}';
+        return getNome()
+                + "/" + getQuantidadeFuncionarios()
+                + "/" + getSalarioBaseFuncionario()
+                + "/" + getEndereco()
+                + "/" + getDataFundacao()
+                + "/" + produtosImportados;
     }
 }

@@ -1,11 +1,10 @@
-import java.util.Date;
-
 public class Produto {
 
     private String nome;
     private double preco;
 
     private Data dataValidade;
+
 
     public Produto(String nome, double preco, Data dataValidade){
         this.nome = nome;
@@ -30,8 +29,8 @@ public class Produto {
         this.preco = preco;
     }
 
-    public void setDataValidade(Date dataValidade) {
-        dataValidade = dataValidade;
+    public void setDataValidade(Data dataValidade) {
+        this.dataValidade = dataValidade;
     }
 
     public Data getDataValidade() {
@@ -48,22 +47,28 @@ public class Produto {
                 '}';
     }
 
-    public boolean estaVencido(Data validadeProduto) {
+    public boolean estaVencido(Data vencido) {
 
+        if (dataValidade.getAno() < vencido.getAno()){
+            return true;
+        } else if (dataValidade.getAno()> vencido.getAno()) {
 
-        boolean esta_S_N = true;
+            return false;
+        }else {
+            if(dataValidade.getMes() < vencido.getMes()){
+                return true;
+            } else if (dataValidade.getMes() > vencido.getMes()) {
+                return false;
 
-        Date dateVenceu = new Date(123, 9, 20);
+            }else {
+                if (dataValidade.getDia() > vencido.getDia()){
+                    return false;
+                }else {
+                    return true;
+                }
+            }
+        }
 
-        Date validadeProdutoTipoDate = new Date(validadeProduto.getAno()-1900, validadeProduto.getMes()-1, validadeProduto.getDia() );
-
-        int numeroAserRetornado = validadeProdutoTipoDate.compareTo(dateVenceu); // retorna  zero se a data é igual, retorna um número menor que zero se a data é inferior e maior que zero se a data e superior a da comparacao
-
-        if (numeroAserRetornado < 0){  esta_S_N = false;  }
-
-
-
-        return esta_S_N;
     }
 
 

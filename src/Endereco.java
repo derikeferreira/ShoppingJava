@@ -1,12 +1,13 @@
 public class Endereco {
 
-    private String nomeDaRua;
+
     private String cidade;
     private String estado;
     private String pais;
     private String cep;
     private String numero;
     private String complemento;
+    private String nomeDaRua;
 
 
     public Endereco(String municipioLoja, String ruaLoja, String estadoLoja, String paisLoja, String cepLoja, String numeroLoja, String complementoLoja){

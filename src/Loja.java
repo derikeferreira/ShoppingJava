@@ -1,4 +1,5 @@
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Loja {
@@ -6,28 +7,62 @@ public class Loja {
     private String nome;
     private int quantidadeFuncionarios;
     private double salarioBaseFuncionario;
-    private Data date;
+    private Data DataFundacao;
     private Endereco endereco;
 
-    public Loja(String nome, int QuantidadeFuncionarios, double SalarioBaseFuncionario, Data date, Endereco endereco){
+    private Produto[] estoqueProdutos;
+
+    public Loja(String nome, int quantidadeFuncionarios, double SalarioBaseFuncionario, Endereco endereco, Data dataFundacao, int tamanhoEstoque){
 
         this.nome = nome;
-        this.quantidadeFuncionarios = QuantidadeFuncionarios;
+        this.quantidadeFuncionarios = quantidadeFuncionarios;
         this.salarioBaseFuncionario = SalarioBaseFuncionario;
-        this.date = date;
         this.endereco = endereco;
+        this.DataFundacao = dataFundacao;
+        estoqueProdutos = new Produto[tamanhoEstoque];
+
 
     }
 
-    public Loja(String nome, int QuantidadeFuncionarios){
+    public Loja(String nome, int quantidadeFuncionarios, Endereco endereco, Data dataFundacao, int tamanhoEstoque){
 
         this.nome = nome;
-        this.quantidadeFuncionarios = QuantidadeFuncionarios;
-
+        this.quantidadeFuncionarios = quantidadeFuncionarios;
+        this.salarioBaseFuncionario = -1;
+        this.endereco = endereco;
+        this.DataFundacao = dataFundacao;
+        estoqueProdutos = new Produto[tamanhoEstoque];
     }
+
 
     public String getNome(){
         return nome;
+    }
+
+
+    public double getSalarioBaseFuncionario() {
+        return salarioBaseFuncionario;
+    }
+
+    public int getQuantidadeFuncionarios(){
+        return quantidadeFuncionarios;
+    }
+
+    public Data getDataFundacao() {
+        return DataFundacao;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public Produto[] getEstoqueProdutos() {
+        return estoqueProdutos;
+    }
+
+
+    public void setEstoqueProdutos(Produto[] estoqueProdutos) {
+        this.estoqueProdutos = estoqueProdutos;
     }
 
     public void setNome(String nome){
@@ -35,75 +70,91 @@ public class Loja {
         this.nome = nome;
     }
 
-    public int getQuantidadeFuncionarios(){
-        return quantidadeFuncionarios;
-    }
-
     public void setQuantidadeFuncionarios(int QuantidadeFuncionarios){
         this.quantidadeFuncionarios = QuantidadeFuncionarios;
     }
 
-    public double getSalarioBaseFuncionario() {
-        return salarioBaseFuncionario;
-    }
+
 
     public void setSalarioBaseFuncionario(double salarioBaseFuncionario) {
-        salarioBaseFuncionario = salarioBaseFuncionario;
+        this.salarioBaseFuncionario = salarioBaseFuncionario;
     }
 
-    public void setDate(Data date) {
-        this.date = date;
+    public void setDataFundacao(Data dateFundacao) {
+        this.DataFundacao = dateFundacao;
     }
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
-    public Data getDate() {
-        return date;
-    }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
 
 
     public String toString() {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
         return "Loja{" +
-                "nome='" + nome +
+                "nome='" + nome + '\'' +
                 ", quantidadeFuncionarios=" + quantidadeFuncionarios +
                 ", salarioBaseFuncionario=" + salarioBaseFuncionario +
-                ", date=" + sdf.format(date) +
+                ", dateFundacao=" + DataFundacao +
                 ", endereco=" + endereco +
                 '}';
     }
 
-    public double gastosComSalario() {
-
-        int QuantidadeFunci = getQuantidadeFuncionarios();
-        double SalarioFun = getSalarioBaseFuncionario();
-        double GastoSalario = QuantidadeFunci * SalarioFun;
-        return GastoSalario;
+    public void imprimeProdutos(){
+        if (estoqueProdutos != null)
+            System.out.println(getEstoqueProdutos());
+        else
+            System.out.println("No momento não a produtos no estoque");
     }
 
-    public String tamanhoDaLoja() {
-        int QuantidadeFunci = getQuantidadeFuncionarios();
-        String CaracterTamanho;
-        if (QuantidadeFunci > 30) {
-            CaracterTamanho = "G";
-            return CaracterTamanho;
-        } else if (QuantidadeFunci > 9 && QuantidadeFunci < 31 ) {
-            CaracterTamanho = "M";
-            return CaracterTamanho;
-        } else if (QuantidadeFunci < 10 ) {
-            CaracterTamanho = "P";
-            return CaracterTamanho;
+    public boolean removeProduto(String nomeProduto){
+        if(estoqueProdutos != null){
+            for(int i = 0; i < estoqueProdutos.length; i++){
+                if(estoqueProdutos[i] != null && estoqueProdutos[i].getNome().equals(nomeProduto)){
+                    estoqueProdutos = null;
+                    return true; // Produto removido com sucesso
+                }
+            }
+        }
+        return false; // Produto não encontrado no estoque
+    }
+
+
+    public boolean insereProduto(Produto novoProduto){
+        if(estoqueProdutos != null){
+            for(int i = 0; i < estoqueProdutos.length; i++){
+                if(estoqueProdutos[i] == null){
+                    estoqueProdutos[i] = novoProduto;
+                    return true; // Produto inserido com sucesso
+                }
+            }
+        }
+        return false; // Produto não inserido no estoque
+    }
+
+
+    public double gastosComSalario() {
+
+        if (salarioBaseFuncionario == -1){
+            return -1;
         } else {
-            CaracterTamanho = "Erro";
-            return CaracterTamanho;
+
+            return  quantidadeFuncionarios * salarioBaseFuncionario;
+
+
+        }
+
+
+    }
+
+    public char tamanhoDaLoja() {
+        if (quantidadeFuncionarios < 10) {
+            return 'P';
+        } else if (quantidadeFuncionarios <= 30) {
+            return 'M';
+        } else {
+            return 'G';
         }
     }
 
